@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "DED853E4C783FD788F2509D5507372440116C40A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "5E4554BE3ABC564F566CA0D880E3536514BA6886" : 0,
+    "DED853E4C783FD788F2509D5507372440116C40A" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A51A7517-36DC-405F-99F7-E6659F875BDF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "5E4554BE3ABC564F566CA0D880E3536514BA6886" : "RHAddressBook\/",
+    "DED853E4C783FD788F2509D5507372440116C40A" : "LinkLabel\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "LinkLabelDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "LinkLabelDemo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ProjectDent\/RHAddressBook.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5E4554BE3ABC564F566CA0D880E3536514BA6886"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ProjectDent\/LinkLabel.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DED853E4C783FD788F2509D5507372440116C40A"
+    }
+  ]
+}
