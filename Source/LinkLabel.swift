@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Project Dent. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 private class Attribute {
     let attributeName: String
