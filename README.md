@@ -39,8 +39,8 @@ If you wish to customise the link appearance:
 
 ```
 let linkTextAttributes = [
-	NSUnderlineStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleSingle.rawValue),
-	NSForegroundColorAttributeName: UIColor.greenColor()
+  NSUnderlineStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleSingle.rawValue),
+  NSForegroundColorAttributeName: UIColor.greenColor()
 ]
 
 let highlightedLinkTextAttributes = [
@@ -61,8 +61,8 @@ label.interactionDelegate = self
 ```
 //MARK: LinkLabelInteractionDelegate
 	
-	func linkLabelDidSelectLink(linkLabel linkLabel: LinkLabel, url: NSURL) {
-	print("did select link: \(url)")
+func linkLabelDidSelectLink(linkLabel linkLabel: LinkLabel, url: NSURL) {
+  print("did select link: \(url)")
 }
 ```
 
