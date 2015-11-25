@@ -1,6 +1,8 @@
 # LinkLabel
 UILabel with custom hyperlink styling, optional interaction delegate, minimal setup
 
+![](http://i.imgur.com/fjHOieW.png)
+
 
 ## What’s up
 Creating a UILabel with attributed text, links appear blue and underlined, and in most cases you don’t want them to be. It’s pretty awkward and a time-kill to try and make them simply be styled the way you desire.
@@ -64,3 +66,10 @@ label.interactionDelegate = self
 }
 ```
 
+## Credit
+
+Created by [Andrew Hart](http://twitter.com/AndrewProjDent), for TwIM.
+
+[ProjectDent.com](http://ProjectDent.com)
+
+[@ProjectDent](http://twitter.com/ProjectDent)
