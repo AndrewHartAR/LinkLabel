@@ -9,6 +9,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '9.0'
   s.requires_arc = true
   s.source_files  = 'Source/*.swift'
-  s.frameworks   = 'UIKit', 'UIKit.UIGestureRecognizerSubclass'
+  s.frameworks   = 'UIKit'
   s.ios.deployment_target = '9.0'
 end
