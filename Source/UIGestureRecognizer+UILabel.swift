@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UIKit.UIGestureRecognizerSubclass
 
 extension UIGestureRecognizer {
     //Returns a character that was touched, or nil if none.

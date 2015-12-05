@@ -28,7 +28,6 @@
 		4940B3171C04BF3C000524A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4940B31E1C04BF7F000524A0 /* LinkLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LinkLabel.swift; path = Source/LinkLabel.swift; sourceTree = SOURCE_ROOT; };
 		4940B31F1C04BF7F000524A0 /* TouchGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchGestureRecognizer.swift; path = Source/TouchGestureRecognizer.swift; sourceTree = SOURCE_ROOT; };
-		4940B3221C04BFA7000524A0 /* LinkLabelDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LinkLabelDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		4940B3251C04C00F000524A0 /* UIGestureRecognizer+UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIGestureRecognizer+UILabel.swift"; path = "Source/UIGestureRecognizer+UILabel.swift"; sourceTree = SOURCE_ROOT; };
 		4940B3271C04C02B000524A0 /* NSMutableAttributedString+RemoveAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSMutableAttributedString+RemoveAttributes.swift"; path = "Source/NSMutableAttributedString+RemoveAttributes.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -70,7 +69,6 @@
 				4940B3121C04BF3C000524A0 /* Assets.xcassets */,
 				4940B3141C04BF3C000524A0 /* LaunchScreen.storyboard */,
 				4940B3171C04BF3C000524A0 /* Info.plist */,
-				4940B3221C04BFA7000524A0 /* LinkLabelDemo-Bridging-Header.h */,
 			);
 			path = LinkLabelDemo;
 			sourceTree = "<group>";
@@ -280,7 +278,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ProjectDent.LinkLabelDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "LinkLabelDemo/LinkLabelDemo-Bridging-Header.h";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -294,7 +293,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ProjectDent.LinkLabelDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "LinkLabelDemo/LinkLabelDemo-Bridging-Header.h";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
