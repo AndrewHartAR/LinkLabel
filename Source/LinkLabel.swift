@@ -30,24 +30,24 @@ private class LinkAttribute {
     }
 }
 
-protocol LinkLabelInteractionDelegate: class {
+public protocol LinkLabelInteractionDelegate: class {
     func linkLabelDidSelectLink(linkLabel linkLabel: LinkLabel, url: NSURL)
 }
 
-class LinkLabel: UILabel, UIGestureRecognizerDelegate {
+public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
     
     private var linkAttributes: Array<LinkAttribute> = []
     
     private var standardTextAttributes: Array<Attribute> = []
     
-    var linkTextAttributes: Dictionary<String, AnyObject> {
+    public var linkTextAttributes: Dictionary<String, AnyObject> {
         didSet {
             self.setupAttributes()
         }
     }
     
     //Text attributes displayed when a link has been highlighted
-    var highlightedLinkTextAttributes: Dictionary<String, AnyObject> {
+    public var highlightedLinkTextAttributes: Dictionary<String, AnyObject> {
         didSet {
             self.setupAttributes()
         }
@@ -61,7 +61,7 @@ class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         }
     }
     
-    override var attributedText: NSAttributedString? {
+    override public var attributedText: NSAttributedString? {
         set {
             if newValue == nil {
                 super.attributedText = newValue
@@ -109,9 +109,9 @@ class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         }
     }
     
-    weak var interactionDelegate: LinkLabelInteractionDelegate?
+    public weak var interactionDelegate: LinkLabelInteractionDelegate?
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         linkTextAttributes = [
             NSUnderlineStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleSingle.rawValue)]
         
@@ -133,7 +133,7 @@ class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         self.setupAttributes()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -210,7 +210,7 @@ class LinkLabel: UILabel, UIGestureRecognizerDelegate {
     
     //MARK: UIGestureRecognizerDelegate
     
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    public func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }
