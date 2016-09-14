@@ -9,17 +9,17 @@
 import UIKit
 
 class TouchGestureRecognizer: UIGestureRecognizer {
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent) {
-        if self.state == UIGestureRecognizerState.Possible {
-            self.state = UIGestureRecognizerState.Began
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+        if self.state == UIGestureRecognizerState.possible {
+            self.state = UIGestureRecognizerState.began
         }
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent) {
-        self.state = UIGestureRecognizerState.Failed
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+        self.state = UIGestureRecognizerState.failed
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent) {
-        self.state = UIGestureRecognizerState.Failed
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
+        self.state = UIGestureRecognizerState.failed
     }
 }

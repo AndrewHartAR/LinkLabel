@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "LinkLabel"
-  s.version      = "1.0.2"
+  s.version      = "1.0.3"
   s.summary      = "UILabel with custom hyperlink styling, optional interaction delegate, minimal setup"
   s.homepage     = "https://github.com/ProjectDent/LinkLabel"
   s.license      = { :type => 'MIT', :file => 'LICENSE'  }

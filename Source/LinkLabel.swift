@@ -7,6 +7,35 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 private class Attribute {
     let attributeName: String
@@ -21,39 +50,39 @@ private class Attribute {
 }
 
 private class LinkAttribute {
-    let url: NSURL
+    let url: URL
     let range: NSRange
     
-    init(url: NSURL, range: NSRange) {
+    init(url: URL, range: NSRange) {
         self.url = url
         self.range = range
     }
 }
 
 public protocol LinkLabelInteractionDelegate: class {
-    func linkLabelDidSelectLink(linkLabel linkLabel: LinkLabel, url: NSURL)
+    func linkLabelDidSelectLink(linkLabel: LinkLabel, url: URL)
 }
 
-public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
+open class LinkLabel: UILabel, UIGestureRecognizerDelegate {
     
-    private var linkAttributes: Array<LinkAttribute> = []
+    fileprivate var linkAttributes: Array<LinkAttribute> = []
     
-    private var standardTextAttributes: Array<Attribute> = []
+    fileprivate var standardTextAttributes: Array<Attribute> = []
     
-    public var linkTextAttributes: Dictionary<String, AnyObject> {
+    open var linkTextAttributes: Dictionary<String, AnyObject> {
         didSet {
             self.setupAttributes()
         }
     }
     
     //Text attributes displayed when a link has been highlighted
-    public var highlightedLinkTextAttributes: Dictionary<String, AnyObject> {
+    open var highlightedLinkTextAttributes: Dictionary<String, AnyObject> {
         didSet {
             self.setupAttributes()
         }
     }
     
-    private var highlightedLinkAttribute: LinkAttribute? {
+    fileprivate var highlightedLinkAttribute: LinkAttribute? {
         didSet {
             if self.highlightedLinkAttribute !== oldValue {
                 self.setupAttributes()
@@ -61,7 +90,7 @@ public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         }
     }
     
-    override public var attributedText: NSAttributedString? {
+    override open var attributedText: NSAttributedString? {
         set {
             if newValue == nil {
                 super.attributedText = newValue
@@ -78,23 +107,19 @@ public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
                 var standardAttributes: Array<Attribute> = []
                 var linkAttributes: Array<LinkAttribute> = []
                 
-                self.attributedText!.enumerateAttributesInRange(
-                    range,
-                    options: []) {
-                        (attributes, range: NSRange, _) -> Void in
-                        for (attributeName, value): (String, AnyObject) in attributes {
-                            
-                            if attributeName == NSLinkAttributeName {
-                                if value is NSURL {
-                                    let linkAttribute = LinkAttribute(url: value as! NSURL, range: range)
-                                    linkAttributes.append(linkAttribute)
-                                }
-                            } else {
-                                let attribute = Attribute(attributeName: attributeName, value: value, range: range)
-                                standardAttributes.append(attribute)
+                self.attributedText!.enumerateAttributes(in: range, options: [], using: { (attributes, range, _) in
+                    for attribute in attributes {
+                        if attribute.key == NSLinkAttributeName {
+                            if attribute.value is URL {
+                                let linkAttribute = LinkAttribute(url: attribute.value as! URL, range: range)
+                                linkAttributes.append(linkAttribute)
                             }
+                        } else {
+                            let attribute = Attribute(attributeName: attribute.key, value: attribute.value as AnyObject, range: range)
+                            standardAttributes.append(attribute)
                         }
-                }
+                    }
+                })
                 
                 self.standardTextAttributes = standardAttributes
                 self.linkAttributes = linkAttributes
@@ -109,24 +134,24 @@ public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         }
     }
     
-    public weak var interactionDelegate: LinkLabelInteractionDelegate?
+    open weak var interactionDelegate: LinkLabelInteractionDelegate?
     
     override public init(frame: CGRect) {
         linkTextAttributes = [
-            NSUnderlineStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleSingle.rawValue)]
+            NSUnderlineStyleAttributeName: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int)]
         
         highlightedLinkTextAttributes = [
-            NSUnderlineStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleSingle.rawValue)]
+            NSUnderlineStyleAttributeName: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int)]
         
         super.init(frame: frame)
         
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         
-        let touchGestureRecognizer = TouchGestureRecognizer(target: self, action: Selector("respondToLinkLabelTouched:"))
+        let touchGestureRecognizer = TouchGestureRecognizer(target: self, action: #selector(LinkLabel.respondToLinkLabelTouched(_:)))
         touchGestureRecognizer.delegate = self
         self.addGestureRecognizer(touchGestureRecognizer)
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("respondToLinkLabelTapped:"))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LinkLabel.respondToLinkLabelTapped(_:)))
         tapGestureRecognizer.delegate = self
         self.addGestureRecognizer(tapGestureRecognizer)
         
@@ -137,13 +162,13 @@ public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func respondToLinkLabelTouched(gestureRecognizer: TouchGestureRecognizer) {
+    func respondToLinkLabelTouched(_ gestureRecognizer: TouchGestureRecognizer) {
         if self.linkAttributes.count == 0 {
             return
         }
         
         //Possible states are began or cancelled
-        if gestureRecognizer.state == UIGestureRecognizerState.Began {
+        if gestureRecognizer.state == UIGestureRecognizerState.began {
             
             let indexOfCharacterTouched = gestureRecognizer.indexOfCharacterTouched(label: self)
             
@@ -161,7 +186,7 @@ public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         self.highlightedLinkAttribute = nil
     }
     
-    func respondToLinkLabelTapped(gestureRecognizer: UITapGestureRecognizer) {
+    func respondToLinkLabelTapped(_ gestureRecognizer: UITapGestureRecognizer) {
         if self.linkAttributes.count == 0 {
             return
         }
@@ -179,7 +204,7 @@ public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         }
     }
     
-    private func setupAttributes() {
+    fileprivate func setupAttributes() {
         if self.attributedText == nil {
             super.attributedText = nil
             return
@@ -210,7 +235,7 @@ public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
     
     //MARK: UIGestureRecognizerDelegate
     
-    public func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }

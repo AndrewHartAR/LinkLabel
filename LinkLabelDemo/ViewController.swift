@@ -14,24 +14,24 @@ class ViewController: UIViewController, LinkLabelInteractionDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
         let text = "This is some text, which incidentally includes a link you may find interesting."
         let fullRange = NSMakeRange(0, (text as NSString).length)
-        let linkRange = (text as NSString).rangeOfString("includes a link")
+        let linkRange = (text as NSString).range(of: "includes a link")
         let attributedString = NSMutableAttributedString(string: text)
-        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(15), range: fullRange)
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: fullRange)
-        attributedString.addAttribute(NSLinkAttributeName, value: NSURL(string: "https://google.com")!, range: linkRange)
+        attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 15), range: fullRange)
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: fullRange)
+        attributedString.addAttribute(NSLinkAttributeName, value: URL(string: "https://google.com")!, range: linkRange)
         
         let linkTextAttributes = [
-            NSUnderlineStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleSingle.rawValue),
-            NSForegroundColorAttributeName: UIColor.greenColor()
+            NSUnderlineStyleAttributeName: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int),
+            NSForegroundColorAttributeName: UIColor.green
         ]
         
         let highlightedLinkTextAttributes = [
-            NSUnderlineStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleSingle.rawValue),
-            NSForegroundColorAttributeName: UIColor.redColor()
+            NSUnderlineStyleAttributeName: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int),
+            NSForegroundColorAttributeName: UIColor.red
         ]
         
         let label = LinkLabel()
@@ -51,7 +51,7 @@ class ViewController: UIViewController, LinkLabelInteractionDelegate {
 
     //MARK: LinkLabelInteractionDelegate
     
-    func linkLabelDidSelectLink(linkLabel linkLabel: LinkLabel, url: NSURL) {
+    func linkLabelDidSelectLink(linkLabel: LinkLabel, url: URL) {
         print("did select link: \(url)")
     }
 }

@@ -11,7 +11,7 @@ import UIKit.UIGestureRecognizerSubclass
 
 extension UIGestureRecognizer {
     //Returns a character that was touched, or nil if none.
-    func indexOfCharacterTouched(label label: UILabel) -> Int? {
+    func indexOfCharacterTouched(label: UILabel) -> Int? {
         if label.attributedText == nil {
             return nil
         }
@@ -28,17 +28,17 @@ extension UIGestureRecognizer {
         textContainer.maximumNumberOfLines = label.numberOfLines
         textContainer.size = label.bounds.size
         
-        let locationOfTouchInLabel = self.locationInView(label)
-        let textBoundingBox = layoutManager.usedRectForTextContainer(textContainer)
+        let locationOfTouchInLabel = self.location(in: label)
+        let textBoundingBox = layoutManager.usedRect(for: textContainer)
         let textContainerOffset = CGPoint(
             x: (label.bounds.size.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x,
             y: (label.bounds.size.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
         let locationOfTouchInTextContainer = CGPoint(
             x: locationOfTouchInLabel.x - textContainerOffset.x,
             y: locationOfTouchInLabel.y - textContainerOffset.y)
-        let indexOfCharacter = layoutManager.characterIndexForPoint(
-            locationOfTouchInTextContainer,
-            inTextContainer: textContainer,
+        let indexOfCharacter = layoutManager.characterIndex(
+            for: locationOfTouchInTextContainer,
+            in: textContainer,
             fractionOfDistanceBetweenInsertionPoints: nil)
         
         return indexOfCharacter
