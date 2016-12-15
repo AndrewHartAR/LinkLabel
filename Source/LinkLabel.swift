@@ -162,6 +162,23 @@ open class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func link(atPoint point: CGPoint) -> URL? {
+        let indexOfCharacter = self.indexOfCharacter(atPoint: point)
+        
+        if indexOfCharacter == nil {
+            return nil
+        }
+        
+        for linkAttribute in self.linkAttributes {
+            if indexOfCharacter! >= linkAttribute.range.location &&
+                indexOfCharacter! <= linkAttribute.range.location + linkAttribute.range.length {
+                return linkAttribute.url
+            }
+        }
+        
+        return nil
+    }
+    
     func respondToLinkLabelTouched(_ gestureRecognizer: TouchGestureRecognizer) {
         if self.linkAttributes.count == 0 {
             return
