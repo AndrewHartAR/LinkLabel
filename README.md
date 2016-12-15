@@ -11,7 +11,13 @@ LinkLabel makes this all easy. *Without any extra code*, links appear the same c
 
 If you want to add custom styling, that’s super simple, too. Same as you would specify attributes for your attributedText, any attributes you want to be different about your links, you add to LinkLabel’s `linkTextAttributes`, and `highlightedLinkTextAttributes`.
 
-## Install
+## Install with CocoaPods
+
+```
+pod 'LinkLabel'
+```
+
+## Install Manually
 1. Drag contents of `Source` folder into your Xcode project.
 2. Add `#import "UIKit/UIGestureRecognizerSubclass.h"` to Bridging Header file.
 
