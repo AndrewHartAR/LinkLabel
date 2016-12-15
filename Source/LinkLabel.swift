@@ -168,8 +168,7 @@ open class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         }
         
         //Possible states are began or cancelled
-        if gestureRecognizer.state == UIGestureRecognizerState.began {
-            
+        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
             let indexOfCharacterTouched = gestureRecognizer.indexOfCharacterTouched(label: self)
             
             if indexOfCharacterTouched != nil {
@@ -181,9 +180,12 @@ open class LinkLabel: UILabel, UIGestureRecognizerDelegate {
                     }
                 }
             }
+            
+            self.highlightedLinkAttribute = nil
+        } else if gestureRecognizer.state == .ended || gestureRecognizer.state == .failed || gestureRecognizer.state == .cancelled {
+            self.highlightedLinkAttribute = nil
         }
         
-        self.highlightedLinkAttribute = nil
     }
     
     func respondToLinkLabelTapped(_ gestureRecognizer: UITapGestureRecognizer) {

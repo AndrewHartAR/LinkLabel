@@ -12,30 +12,42 @@ import UIKit.UIGestureRecognizerSubclass
 extension UIGestureRecognizer {
     //Returns a character that was touched, or nil if none.
     func indexOfCharacterTouched(label: UILabel) -> Int? {
-        if label.attributedText == nil {
+        let locationOfTouchInLabel = self.location(in: label)
+        
+        return label.indexOfCharacter(atPoint: locationOfTouchInLabel)
+    }
+}
+
+extension UILabel {
+    func indexOfCharacter(atPoint point: CGPoint) -> Int? {
+        if self.attributedText == nil {
             return nil
         }
         
         let layoutManager = NSLayoutManager()
         let textContainer = NSTextContainer()
-        let textStorage = NSTextStorage(attributedString: label.attributedText!)
+        let textStorage = NSTextStorage(attributedString: self.attributedText!)
         
         layoutManager.addTextContainer(textContainer)
         textStorage.addLayoutManager(layoutManager)
         
         textContainer.lineFragmentPadding = 0
-        textContainer.lineBreakMode = label.lineBreakMode
-        textContainer.maximumNumberOfLines = label.numberOfLines
-        textContainer.size = label.bounds.size
+        textContainer.lineBreakMode = self.lineBreakMode
+        textContainer.maximumNumberOfLines = self.numberOfLines
+        textContainer.size = self.bounds.size
         
-        let locationOfTouchInLabel = self.location(in: label)
         let textBoundingBox = layoutManager.usedRect(for: textContainer)
+        
+        if !textBoundingBox.contains(point) {
+            return nil
+        }
+        
         let textContainerOffset = CGPoint(
-            x: (label.bounds.size.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x,
-            y: (label.bounds.size.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
+            x: (self.bounds.size.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x,
+            y: (self.bounds.size.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
         let locationOfTouchInTextContainer = CGPoint(
-            x: locationOfTouchInLabel.x - textContainerOffset.x,
-            y: locationOfTouchInLabel.y - textContainerOffset.y)
+            x: point.x - textContainerOffset.x,
+            y: point.y - textContainerOffset.y)
         let indexOfCharacter = layoutManager.characterIndex(
             for: locationOfTouchInTextContainer,
             in: textContainer,
