@@ -17,14 +17,15 @@ class ViewController: UIViewController, LinkLabelInteractionDelegate {
         let text = "This is some text, which incidentally includes a link you may find interesting."
         let fullRange = NSMakeRange(0, (text as NSString).length)
         let linkRange = (text as NSString).range(of: "includes a link")
+
         let attributedString = NSMutableAttributedString(string: text)
         attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 15), range: fullRange)
         attributedString.addAttribute(.foregroundColor, value: UIColor.black, range: fullRange)
         attributedString.addAttribute(.link, value: URL(string: "https://google.com")!, range: linkRange)
         
         let linkTextAttributes: [NSAttributedStringKey: AnyObject] = [
-            NSAttributedStringKey.underlineStyle: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int),
-            NSAttributedStringKey.foregroundColor: UIColor.green
+            .underlineStyle: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int),
+            .foregroundColor: UIColor.green
         ]
         
         let highlightedLinkTextAttributes: [NSAttributedStringKey: AnyObject] = [

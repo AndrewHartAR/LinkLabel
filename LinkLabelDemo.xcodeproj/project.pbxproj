@@ -16,6 +16,7 @@
 		4940B3211C04BF7F000524A0 /* TouchGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4940B31F1C04BF7F000524A0 /* TouchGestureRecognizer.swift */; };
 		4940B3261C04C00F000524A0 /* UIGestureRecognizer+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4940B3251C04C00F000524A0 /* UIGestureRecognizer+UILabel.swift */; };
 		4940B3281C04C02B000524A0 /* NSMutableAttributedString+RemoveAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4940B3271C04C02B000524A0 /* NSMutableAttributedString+RemoveAttributes.swift */; };
+		9BBA120B1FB494820066F093 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9BBA120A1FB494820066F093 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		4940B31F1C04BF7F000524A0 /* TouchGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchGestureRecognizer.swift; path = Source/TouchGestureRecognizer.swift; sourceTree = SOURCE_ROOT; };
 		4940B3251C04C00F000524A0 /* UIGestureRecognizer+UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIGestureRecognizer+UILabel.swift"; path = "Source/UIGestureRecognizer+UILabel.swift"; sourceTree = SOURCE_ROOT; };
 		4940B3271C04C02B000524A0 /* NSMutableAttributedString+RemoveAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSMutableAttributedString+RemoveAttributes.swift"; path = "Source/NSMutableAttributedString+RemoveAttributes.swift"; sourceTree = SOURCE_ROOT; };
+		9BBA120A1FB494820066F093 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +48,7 @@
 		4940B2FF1C04BF3C000524A0 = {
 			isa = PBXGroup;
 			children = (
+				9BBA120A1FB494820066F093 /* README.md */,
 				4940B30A1C04BF3C000524A0 /* LinkLabelDemo */,
 				4940B3091C04BF3C000524A0 /* Products */,
 			);
@@ -146,6 +149,7 @@
 			files = (
 				4940B3161C04BF3C000524A0 /* LaunchScreen.storyboard in Resources */,
 				4940B3131C04BF3C000524A0 /* Assets.xcassets in Resources */,
+				9BBA120B1FB494820066F093 /* README.md in Resources */,
 				4940B3111C04BF3C000524A0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
