@@ -20,13 +20,13 @@ extension UIGestureRecognizer {
 
 public extension UILabel {
     public func indexOfCharacter(atPoint point: CGPoint) -> Int? {
-        if self.attributedText == nil {
+        guard let attributedText = self.attributedText else {
             return nil
         }
         
         let layoutManager = NSLayoutManager()
         let textContainer = NSTextContainer()
-        let textStorage = NSTextStorage(attributedString: self.attributedText!)
+        let textStorage = NSTextStorage(attributedString: attributedText)
         
         layoutManager.addTextContainer(textContainer)
         textStorage.addLayoutManager(layoutManager)
@@ -44,14 +44,17 @@ public extension UILabel {
         
         let textContainerOffset = CGPoint(
             x: (self.bounds.size.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x,
-            y: (self.bounds.size.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
+            y: (self.bounds.size.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y
+        )
         let locationOfTouchInTextContainer = CGPoint(
             x: point.x - textContainerOffset.x,
-            y: point.y - textContainerOffset.y)
+            y: point.y - textContainerOffset.y
+        )
         let indexOfCharacter = layoutManager.characterIndex(
             for: locationOfTouchInTextContainer,
             in: textContainer,
-            fractionOfDistanceBetweenInsertionPoints: nil)
+            fractionOfDistanceBetweenInsertionPoints: nil
+        )
         
         return indexOfCharacter
     }
