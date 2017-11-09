@@ -37,11 +37,7 @@ public extension UILabel {
         textContainer.size = self.bounds.size
         
         let textBoundingBox = layoutManager.usedRect(for: textContainer)
-        
-        if !textBoundingBox.contains(point) {
-            return nil
-        }
-        
+
         let textContainerOffset = CGPoint(
             x: (self.bounds.size.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x,
             y: (self.bounds.size.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y
