@@ -141,6 +141,26 @@ open class LinkLabel: UILabel, UIGestureRecognizerDelegate {
     open weak var interactionDelegate: LinkLabelInteractionDelegate?
     
     override public init(frame: CGRect) {
+        (linkTextAttributes, highlightedLinkTextAttributes) = LinkLabel.defaultAttributes()
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        (linkTextAttributes, highlightedLinkTextAttributes) = LinkLabel.defaultAttributes()
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    static private func defaultAttributes() -> (linkTextAttributes: Dictionary<NSAttributedStringKey, AnyObject>, highlightedLinkTextAttributes: Dictionary<NSAttributedStringKey, AnyObject>) {
+        return (linkTextAttributes: [
+            .underlineStyle: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int)
+            ], highlightedLinkTextAttributes: [
+                .underlineStyle: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int)
+            ])
+    }
+    
+    private func commonInit() {
         linkTextAttributes = [
             .underlineStyle: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int)
         ]
@@ -148,8 +168,6 @@ open class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         highlightedLinkTextAttributes = [
             .underlineStyle: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int)
         ]
-        
-        super.init(frame: frame)
         
         self.isUserInteractionEnabled = true
         
@@ -162,10 +180,6 @@ open class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         self.addGestureRecognizer(tapGestureRecognizer)
         
         self.setupAttributes()
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     public func link(atPoint point: CGPoint) -> URL? {
