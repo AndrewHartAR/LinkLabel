@@ -136,7 +136,27 @@ public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        linkTextAttributes = [
+            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle
+        ]
+        
+        highlightedLinkTextAttributes = [
+            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle
+        ]
+        
+        super.init(coder: aDecoder)
+        
+        self.isUserInteractionEnabled = true
+        
+        let touchGestureRecognizer = TouchGestureRecognizer(target: self, action: #selector(LinkLabel.respondToLinkLabelTouched))
+        touchGestureRecognizer.delegate = self
+        self.addGestureRecognizer(touchGestureRecognizer)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LinkLabel.respondToLinkLabelTapped))
+        tapGestureRecognizer.delegate = self
+        self.addGestureRecognizer(tapGestureRecognizer)
+        
+        self.setupAttributes()
     }
     
     @objc func respondToLinkLabelTouched(gestureRecognizer: TouchGestureRecognizer) {
