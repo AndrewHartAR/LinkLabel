@@ -137,11 +137,11 @@ public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
     
     required public init?(coder aDecoder: NSCoder) {
         linkTextAttributes = [
-            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle
+            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue
         ]
         
         highlightedLinkTextAttributes = [
-            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle
+            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue
         ]
         
         super.init(coder: aDecoder)
