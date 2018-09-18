@@ -16,14 +16,10 @@ class TouchGestureRecognizer: UIGestureRecognizer {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
-        self.state = UIGestureRecognizerState.changed
+        self.state = UIGestureRecognizerState.failed
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
-        self.state = UIGestureRecognizerState.ended
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
-        self.state = UIGestureRecognizerState.cancelled
+        self.state = UIGestureRecognizerState.failed
     }
 }
