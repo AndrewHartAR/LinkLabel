@@ -9,11 +9,11 @@
 import UIKit
 
 private struct Attribute {
-    let attributeName: NSAttributedStringKey
+    let attributeName: NSAttributedString.Key
     let value: Any
     let range: NSRange
     
-    init(attributeName: NSAttributedStringKey, value: Any, range: NSRange) {
+    init(attributeName: NSAttributedString.Key, value: Any, range: NSRange) {
         self.attributeName = attributeName
         self.value = value
         self.range = range
@@ -40,14 +40,14 @@ public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
     
     private var standardTextAttributes: Array<Attribute> = []
     
-    public var linkTextAttributes: Dictionary<NSAttributedStringKey, Any> {
+    public var linkTextAttributes: Dictionary<NSAttributedString.Key, Any> {
         didSet {
             self.setupAttributes()
         }
     }
     
     //Text attributes displayed when a link has been highlighted
-    public var highlightedLinkTextAttributes: Dictionary<NSAttributedStringKey, Any> {
+    public var highlightedLinkTextAttributes: Dictionary<NSAttributedString.Key, Any> {
         didSet {
             self.setupAttributes()
         }
@@ -84,7 +84,7 @@ public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
                         (attributes, range: NSRange, _) -> Void in
                         for (attributeName, value) in attributes {
                             
-                            if attributeName == NSAttributedStringKey.link {
+                            if attributeName == NSAttributedString.Key.link {
                                 if value is NSURL {
                                     let linkAttribute = LinkAttribute(url: value as! NSURL, range: range)
                                     linkAttributes.append(linkAttribute)
@@ -113,11 +113,11 @@ public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
     
     override public init(frame: CGRect) {
         linkTextAttributes = [
-            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle
+            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single
         ]
         
         highlightedLinkTextAttributes = [
-            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle
+            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single
         ]
         
         super.init(frame: frame)
@@ -137,11 +137,11 @@ public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
     
     required public init?(coder aDecoder: NSCoder) {
         linkTextAttributes = [
-            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue
+            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
         ]
         
         highlightedLinkTextAttributes = [
-            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue
+            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
         ]
         
         super.init(coder: aDecoder)
@@ -165,7 +165,7 @@ public class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         }
         
         //Possible states are began or cancelled
-        if gestureRecognizer.state == UIGestureRecognizerState.began {
+        if gestureRecognizer.state == .began {
             
             let indexOfCharacterTouched = gestureRecognizer.indexOfCharacterTouched(label: self)
             
