@@ -15,11 +15,14 @@ extension NSMutableAttributedString {
     }
     
     func removeAttributes(range: NSRange) {
-        self.enumerateAttributes(in: range, options: []) {
-            (attributes: [String: Any], range: NSRange, _) in
-            for attribute in attributes {
-                self.removeAttribute(attribute.key, range: range)
-            }
+        self.enumerateAttributes(
+            in: range,
+            options: []) {
+                (attributes, range: NSRange, _) -> Void in
+                
+                for (attributeName, _) in attributes {
+                    self.removeAttribute(attributeName, range: range)
+                }
         }
     }
 }
