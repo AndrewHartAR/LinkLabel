@@ -59,7 +59,7 @@ private class LinkAttribute {
     }
 }
 
-extension NSAttributedStringKey {
+extension NSAttributedString.Key {
     // static NSAttributedStringKey
 }
 
@@ -73,14 +73,14 @@ open class LinkLabel: UILabel, UIGestureRecognizerDelegate {
     
     fileprivate var standardTextAttributes: Array<Attribute> = []
     
-    open var linkTextAttributes: Dictionary<NSAttributedStringKey, AnyObject> {
+    open var linkTextAttributes: Dictionary<NSAttributedString.Key, AnyObject> {
         didSet {
             self.setupAttributes()
         }
     }
     
     //Text attributes displayed when a link has been highlighted
-    open var highlightedLinkTextAttributes: Dictionary<NSAttributedStringKey, AnyObject> {
+    open var highlightedLinkTextAttributes: Dictionary<NSAttributedString.Key, AnyObject> {
         didSet {
             self.setupAttributes()
         }
@@ -152,21 +152,21 @@ open class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         commonInit()
     }
     
-    static private func defaultAttributes() -> (linkTextAttributes: Dictionary<NSAttributedStringKey, AnyObject>, highlightedLinkTextAttributes: Dictionary<NSAttributedStringKey, AnyObject>) {
+    static private func defaultAttributes() -> (linkTextAttributes: Dictionary<NSAttributedString.Key, AnyObject>, highlightedLinkTextAttributes: Dictionary<NSAttributedString.Key, AnyObject>) {
         return (linkTextAttributes: [
-            .underlineStyle: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int)
+            .underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue as Int)
             ], highlightedLinkTextAttributes: [
-                .underlineStyle: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int)
+                .underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue as Int)
             ])
     }
     
     private func commonInit() {
         linkTextAttributes = [
-            .underlineStyle: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int)
+            .underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue as Int)
         ]
         
         highlightedLinkTextAttributes = [
-            .underlineStyle: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int)
+            .underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue as Int)
         ]
         
         self.isUserInteractionEnabled = true
@@ -255,7 +255,7 @@ open class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         
         for attribute in self.standardTextAttributes {
             mutableAttributedText.addAttribute(
-                NSAttributedStringKey(rawValue: attribute.attributeName),
+                NSAttributedString.Key(rawValue: attribute.attributeName),
                 value: attribute.value,
                 range: attribute.range
             )
