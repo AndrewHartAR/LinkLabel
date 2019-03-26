@@ -19,7 +19,7 @@ extension UIGestureRecognizer {
 }
 
 public extension UILabel {
-    public func indexOfCharacter(atPoint point: CGPoint) -> Int? {
+    func indexOfCharacter(atPoint point: CGPoint) -> Int? {
         guard let attributedText = self.attributedText else {
             return nil
         }

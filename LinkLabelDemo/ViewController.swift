@@ -23,13 +23,13 @@ class ViewController: UIViewController, LinkLabelInteractionDelegate {
         attributedString.addAttribute(.foregroundColor, value: UIColor.black, range: fullRange)
         attributedString.addAttribute(.link, value: URL(string: "https://google.com")!, range: linkRange)
         
-        let linkTextAttributes: [NSAttributedStringKey: AnyObject] = [
-            .underlineStyle: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int),
+        let linkTextAttributes: [NSAttributedString.Key: AnyObject] = [
+            .underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue as Int),
             .foregroundColor: UIColor.green
         ]
         
-        let highlightedLinkTextAttributes: [NSAttributedStringKey: AnyObject] = [
-            .underlineStyle: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int),
+        let highlightedLinkTextAttributes: [NSAttributedString.Key: AnyObject] = [
+            .underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue as Int),
             .foregroundColor: UIColor.red
         ]
         
