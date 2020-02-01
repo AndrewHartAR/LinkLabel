@@ -31,26 +31,28 @@ let myLabel = LinkLabel()
 Setup attributed text, including `NSLinkAttributeName`, as normal.
 
 ```swift
-let text = "This is some text, which includes a link."
+let text = "This is some text, which includes a url link and a string link."
 let fullRange = NSMakeRange(0, (text as NSString).length)
-let linkRange = (text as NSString).rangeOfString("includes a link")
+let urlRange = (text as NSString).range(of: "url link")
+let stringRange = (text as NSString).range(of: "string link")
 
 let attributedString = NSMutableAttributedString(string: text)
 attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 15), range: fullRange)
 attributedString.addAttribute(.foregroundColor, value: UIColor.black, range: fullRange)
-attributedString.addAttribute(.link, value: URL(string: "https://google.com")!, range: linkRange)
+attributedString.addAttribute(.link, value: URL(string: "https://google.com")!, range: urlRange)
+attributedString.addAttribute(.link, value: "string_link", range: stringRange)
 ```
 
 If you wish to customise the link appearance:
 
 ```swift
-let linkTextAttributes: [NSAttributedStringKey: AnyObject] = [
-    .underlineStyle: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int),
+let linkTextAttributes: [NSAttributedString.Key: Any] = [
+    .underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
     .foregroundColor: UIColor.green
 ]
 
-let highlightedLinkTextAttributes: [NSAttributedStringKey: AnyObject] = [
-    .underlineStyle: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue as Int),
+let highlightedLinkTextAttributes: [NSAttributedString.Key: Any] = [
+    .underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
     .foregroundColor: UIColor.red
 ]
 
@@ -65,10 +67,15 @@ label.interactionDelegate = self
 ```
 
 ```swift
-//MARK: LinkLabelInteractionDelegate
+// MARK: LinkLabelInteractionDelegate
 
-func linkLabelDidSelectLink(linkLabel linkLabel: LinkLabel, url: NSURL) {
-  print("did select link: \(url)")
+func linkLabel(_ label: LinkLabel, didSelectLinkWith value: LinkLabel.LinkValue) {
+    switch value {
+    case .url(let url):
+        print("did select link: \(url)")
+    case .string(let string):
+        print("did select link: \(string)")
+    }
 }
 ```
 
