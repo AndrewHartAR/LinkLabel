@@ -32,15 +32,15 @@ public extension UILabel {
         textStorage.addLayoutManager(layoutManager)
         
         textContainer.lineFragmentPadding = 0
-        textContainer.lineBreakMode = self.lineBreakMode
-        textContainer.maximumNumberOfLines = self.numberOfLines
-        textContainer.size = self.bounds.size
+        textContainer.lineBreakMode = lineBreakMode
+        textContainer.maximumNumberOfLines = numberOfLines
+        textContainer.size = CGSize(width: bounds.width, height: .greatestFiniteMagnitude)
         
         let textBoundingBox = layoutManager.usedRect(for: textContainer)
 
         let textContainerOffset = CGPoint(
-            x: (self.bounds.size.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x,
-            y: (self.bounds.size.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y
+            x: (bounds.width - textBoundingBox.width) * 0.5 - textBoundingBox.origin.x,
+            y: (bounds.height - textBoundingBox.height) * 0.5 - textBoundingBox.origin.y
         )
         let locationOfTouchInTextContainer = CGPoint(
             x: point.x - textContainerOffset.x,
