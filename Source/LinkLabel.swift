@@ -109,9 +109,21 @@ open class LinkLabel: UILabel, UIGestureRecognizerDelegate {
     
     open weak var interactionDelegate: LinkLabelInteractionDelegate?
     
-    override public init(frame: CGRect) {
-        linkTextAttributes = LinkLabel.defaultLinkTextAttributes
-        highlightedLinkTextAttributes = LinkLabel.defaultHighlightedLinkTextAttributes
+    override public convenience init(frame: CGRect) {
+        self.init(
+            frame: frame,
+            linkTextAttributes: LinkLabel.defaultLinkTextAttributes,
+            highlightedLinkTextAttributes: LinkLabel.defaultHighlightedLinkTextAttributes
+        )
+    }
+    
+    public init(
+        frame: CGRect = .zero,
+        linkTextAttributes: [NSAttributedString.Key : Any],
+        highlightedLinkTextAttributes: [NSAttributedString.Key : Any]
+    ) {
+        self.linkTextAttributes = linkTextAttributes
+        self.highlightedLinkTextAttributes = highlightedLinkTextAttributes
         super.init(frame: frame)
         commonInit()
     }
