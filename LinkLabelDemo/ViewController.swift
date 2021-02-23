@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, LinkLabelInteractionDelegate {
+class ViewController: UIViewController {
     
 
     override func viewDidLoad() {
@@ -42,21 +42,17 @@ class ViewController: UIViewController, LinkLabelInteractionDelegate {
         label.attributedText = attributedString
         label.linkTextAttributes = linkTextAttributes
         label.highlightedLinkTextAttributes = highlightedLinkTextAttributes
-        label.interactionDelegate = self
+        label.onSelectLink = { value in
+            switch value {
+            case .url(let url):
+                print("did select link: \(url)")
+            case .string(let string):
+                print("did select link: \(string)")
+            }
+        }
         label.frame = CGRect(x: 20, y: 20, width: 280, height: 400)
 
         self.view.addSubview(label)
-    }
-
-    // MARK: LinkLabelInteractionDelegate
-    
-    func linkLabel(_ label: LinkLabel, didSelectLinkWith value: LinkLabel.LinkValue) {
-        switch value {
-        case .url(let url):
-            print("did select link: \(url)")
-        case .string(let string):
-            print("did select link: \(string)")
-        }
     }
 }
 
