@@ -103,7 +103,7 @@ open class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         }
     }
         
-    var onSelectLink: ((_ value: LinkLabel.LinkValue) -> Void)?
+    public var onSelectLink: ((_ value: LinkLabel.LinkValue) -> Void)?
     
     override public convenience init(frame: CGRect) {
         self.init(
