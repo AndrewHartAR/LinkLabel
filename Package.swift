@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "Kingfisher",
+    name: "LinkLabel",
     platforms: [.iOS(.v10)],
     products: [
         .library(name: "LinkLabel", targets: ["LinkLabel"])
