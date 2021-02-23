@@ -60,16 +60,10 @@ label.linkTextAttributes = linkTextAttributes
 label.highlightedLinkTextAttributes = highlightedLinkTextAttributes
 ```
 
-To make it easier to respond to link taps, I’ve added in an interaction delegate. Adopt `LinkLabelInteractionDelegate`, and then implement the delegate function:
+To make it easier to respond to link taps, set a closure on the onSelectLink property:
 
 ```swift
-label.interactionDelegate = self
-```
-
-```swift
-// MARK: LinkLabelInteractionDelegate
-
-func linkLabel(_ label: LinkLabel, didSelectLinkWith value: LinkLabel.LinkValue) {
+label.onSelectLink = { value in
     switch value {
     case .url(let url):
         print("did select link: \(url)")
