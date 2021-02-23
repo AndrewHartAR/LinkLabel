@@ -8,10 +8,6 @@
 
 import UIKit
 
-public protocol LinkLabelInteractionDelegate: class {
-    func linkLabel(_ label: LinkLabel, didSelectLinkWith value: LinkLabel.LinkValue)
-}
-
 open class LinkLabel: UILabel, UIGestureRecognizerDelegate {
     
     public enum LinkValue: Equatable {
@@ -106,8 +102,8 @@ open class LinkLabel: UILabel, UIGestureRecognizerDelegate {
             super.attributedText
         }
     }
-    
-    open weak var interactionDelegate: LinkLabelInteractionDelegate?
+        
+    var onSelectLink: ((_ value: LinkLabel.LinkValue) -> Void)?
     
     override public convenience init(frame: CGRect) {
         self.init(
@@ -189,7 +185,7 @@ open class LinkLabel: UILabel, UIGestureRecognizerDelegate {
         guard linkAttributes.count > 0, let charIndex = gestureRecognizer.indexOfCharacterTouched(label: self) else { return }
         
         if let linkAttribute = linkAttributes.first(where: { NSLocationInRange(charIndex, $0.range) }) {
-            interactionDelegate?.linkLabel(self, didSelectLinkWith: linkAttribute.value)
+            onSelectLink?(linkAttribute.value)
         }
     }
     
