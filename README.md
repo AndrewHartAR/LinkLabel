@@ -24,51 +24,52 @@ pod 'LinkLabel'
 ## Usage
 Create a label using `LinkLabel`, instead of UILabel.
 
-```
+```swift
 let myLabel = LinkLabel()
 ```
 
 Setup attributed text, including `NSLinkAttributeName`, as normal.
 
-```
-let text = "This is some text, which includes a link."
+```swift
+let text = "This is some text, which includes a url link and a string link."
 let fullRange = NSMakeRange(0, (text as NSString).length)
-let linkRange = (text as NSString).rangeOfString("includes a link")
-  
+let urlRange = (text as NSString).range(of: "url link")
+let stringRange = (text as NSString).range(of: "string link")
+
 let attributedString = NSMutableAttributedString(string: text)
-attributedString.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(15), range: fullRange)
-attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: fullRange)
-attributedString.addAttribute(NSLinkAttributeName, value: NSURL(string: "https://google.com")!, range: linkRange)
+attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 15), range: fullRange)
+attributedString.addAttribute(.foregroundColor, value: UIColor.black, range: fullRange)
+attributedString.addAttribute(.link, value: URL(string: "https://google.com")!, range: urlRange)
+attributedString.addAttribute(.link, value: "string_link", range: stringRange)
 ```
 
 If you wish to customise the link appearance:
 
-```
-let linkTextAttributes = [
-  NSUnderlineStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleSingle.rawValue),
-  NSForegroundColorAttributeName: UIColor.greenColor()
+```swift
+let linkTextAttributes: [NSAttributedString.Key: Any] = [
+    .underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+    .foregroundColor: UIColor.green
 ]
 
-let highlightedLinkTextAttributes = [
-  NSUnderlineStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleSingle.rawValue),
-  NSForegroundColorAttributeName: UIColor.redColor()
+let highlightedLinkTextAttributes: [NSAttributedString.Key: Any] = [
+    .underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+    .foregroundColor: UIColor.red
 ]
 
 label.linkTextAttributes = linkTextAttributes
 label.highlightedLinkTextAttributes = highlightedLinkTextAttributes
 ```
 
-To make it easier to respond to link taps, I’ve added in an interaction delegate. Adopt `LinkLabelInteractionDelegate`, and then implement the delegate function:
+To make it easier to respond to link taps, set a closure on the onSelectLink property:
 
-```
-label.interactionDelegate = self
-```
-
-```
-//MARK: LinkLabelInteractionDelegate
-	
-func linkLabelDidSelectLink(linkLabel linkLabel: LinkLabel, url: NSURL) {
-  print("did select link: \(url)")
+```swift
+label.onSelectLink = { value in
+    switch value {
+    case .url(let url):
+        print("did select link: \(url)")
+    case .string(let string):
+        print("did select link: \(string)")
+    }
 }
 ```
 
